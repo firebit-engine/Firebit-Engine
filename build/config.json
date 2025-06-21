@@ -1,0 +1,17 @@
+{
+    "program-name": "editor",
+    "program-icon": "data/icons/icon.ico",
+    "source-dir":   "src/",
+    "build-dir":    "build/",
+    "compiler":     "gcc",
+    "std":          "c23",
+    "strip":        true,
+    "includes":     ["src/include/"],
+    "libraries":    ["src/libs/"],
+    "libnames":     [],
+    "optimization": "-O3",
+    "console-disabled": false,
+    "warnings": ["-Wall"],
+    "compile-flags": ["-DEDITOR_COMPILATION_MODE"],
+    "linker-flags": []
+}

@@ -1,0 +1,5 @@
+.idea
+build/bin/
+build/obj/
+build-engine-pc/bin/
+build-engine-pc/obj/

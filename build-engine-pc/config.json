@@ -1,0 +1,17 @@
+{
+    "program-name": "engine",
+    "program-icon": null,
+    "source-dir":   "src/engine/",
+    "build-dir":    "build-engine-pc/",
+    "compiler":     "gcc",
+    "std":          "c23",
+    "strip":        true,
+    "includes":     ["src/include/"],
+    "libraries":    ["src/libs/"],
+    "libnames":     [],
+    "optimization": "-O3",
+    "console-disabled": false,
+    "warnings": ["-Wall"],
+    "compile-flags": [],
+    "linker-flags": []
+}
