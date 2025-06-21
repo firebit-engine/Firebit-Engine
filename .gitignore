@@ -1,5 +1,7 @@
 .idea
 build/bin/
 build/obj/
+build/tools/metadata.json
 build-engine-pc/bin/
 build-engine-pc/obj/
+build-engine-pc/tools/metadata.json
