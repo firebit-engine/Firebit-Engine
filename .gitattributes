@@ -1,3 +1,9 @@
 src/include/SDL3/*.h linguist-language=C
+
 src/include/SDL3/** linguist-vendored
+src/include/SDL3/**/*.h linguist-vendored
+src/include/SDL3/**/*.c linguist-vendored
+
 src/include/engine/math/cglm/** linguist-vendored
+src/include/engine/math/cglm/**/*.h linguist-vendored
+src/include/engine/math/cglm/**/*.c linguist-vendored
