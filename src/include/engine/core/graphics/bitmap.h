@@ -2,12 +2,12 @@
 // bitmap.h - Заголовочный файл приложения.
 //
 
-#ifndef EC_CORE_GRAPHICS_BITMAP_H
-#define EC_CORE_GRAPHICS_BITMAP_H
+#ifndef FEC_GRAPHICS_BITMAP_H
+#define FEC_GRAPHICS_BITMAP_H
 
 
 // Стуктура битмапа:
-typedef struct EC_SBitmap EC_Bitmap;
+typedef struct FECG_Bitmap FECG_Bitmap;
 
 
-#endif  // EC_CORE_GRAPHICS_BITMAP_H
+#endif  // FEC_GRAPHICS_BITMAP_H
