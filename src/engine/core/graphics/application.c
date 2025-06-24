@@ -11,9 +11,7 @@
 
 // Главная основная общая структура приложения:
 typedef struct EC_Application {
-    EC_AppApi    *api;     // Набор API приложения (окна).
     EC_AppConfig *config;  // Структура данных для настройки окна.
-    unsigned int  id;      // Айди окна.
 
     // Основные функции приложения (ваши функции которые будут вызываться):
     void (*start)   (struct EC_Application *self);                         // Вызывается после создания окна.
@@ -23,11 +21,9 @@ typedef struct EC_Application {
     void (*show)    (struct EC_Application *self);                         // Вызывается при разворачивании окна.
     void (*hide)    (struct EC_Application *self);                         // Вызывается при сворачивании окна.
     void (*destroy) (struct EC_Application *self);                         // Вызывается при закрытии окна.
-} EC_Application;  // EC_ - Engine Core.
 
+    // -------------------------------- API окна: --------------------------------
 
-// Набор функций для управления окном приложения (реализуйте функции ниже, в своей реализации):
-typedef struct EC_AppApi {
     void (*create) (struct EC_Application *self);  // Вызовите для открытия приложения.
     void (*close)  (struct EC_Application *self);  // Вызовите для закрытия приложения.
 
@@ -41,28 +37,89 @@ typedef struct EC_AppApi {
     void (*get_size) (struct EC_Application *self, int *width, int *height);  // Получить размер окна.
 
     void (*set_width) (struct EC_Application *self, int width);  // Установить ширину окна.
-    int  (*get_width) (struct EC_Application *self, int width);  // Получить ширину окна.
+    int  (*get_width) (struct EC_Application *self);             // Получить ширину окна.
 
     void (*set_height) (struct EC_Application *self, int height);  // Установить высоту окна.
-    int  (*get_height) (struct EC_Application *self, int height);  // Получить высоту окна.
-} EC_AppApi;  // EC_ - Engine Core.
+    int  (*get_height) (struct EC_Application *self);              // Получить высоту окна.
+
+    void (*get_center) (struct EC_Application *self, int *x, int *y);  // Получить центр окна.
+
+    void (*set_position) (struct EC_Application *self, int x, int y);    // Установить позицию окна.
+    void (*get_position) (struct EC_Application *self, int *x, int *y);  // Получить позицию окна.
+
+    void (*set_vsync) (struct EC_Application *self, bool vsync);  // Установить вертикальную синхронизацию.
+    bool (*get_vsync) (struct EC_Application *self);              // Получить вертикальную синхронизацию.
+
+    void (*set_fps)         (struct EC_Application *self, int fps);  // Установить фпс окна.
+    int  (*get_settled_fps) (struct EC_Application *self);           // Получить установленный фпс окна.
+
+    void (*set_visible) (struct EC_Application *self, bool visible);  // Установить видимость окна.
+    bool (*get_visible) (struct EC_Application *self);                // Получить видимость окна.
+
+    void (*set_titlebar) (struct EC_Application *self, bool titlebar);  // Установить видимость заголовка окна.
+    bool (*get_titlebar) (struct EC_Application *self);                 // Получить видимость заголовка окна.
+
+    void (*set_resizable) (struct EC_Application *self, bool resizable);  // Установить масштабируемость окна.
+    bool (*get_resizable) (struct EC_Application *self);                  // Получить масштабируемость окна.
+
+    void (*set_fullscreen) (struct EC_Application *self, bool fullscreen);  // Установить полноэкранный режим.
+    bool (*get_fullscreen) (struct EC_Application *self);                   // Получить полноэкранный режим.
+
+    void (*set_min_size) (struct EC_Application *self, int width, int height);    // Установить мин. размер окна.
+    void (*get_min_size) (struct EC_Application *self, int *width, int *height);  // Получить мин. размер окна.
+
+    void (*set_max_size) (struct EC_Application *self, int width, int height);    // Установить макс. размер окна.
+    void (*get_max_size) (struct EC_Application *self, int *width, int *height);  // Получить макс. размер окна.
+
+    unsigned int (*get_window_display_id) (struct EC_Application);  // Получить айди дисплея на котором находится окно.
+
+    bool (*get_display_size) (struct EC_Application *self, unsigned int id, int *w, int *h);  // Получить размер экрана.
+
+    float (*get_fps) (struct EC_Application *self);  // Получить текущий фпс окна.
+
+    float (*get_dt) (struct EC_Application *self);  // Получить дельту времени.
+
+    double (*get_time) (struct EC_Application *self);  // Получить время со старта окна.
+
+    void (*display) (struct EC_Application *self);  // Отрисовка содержимого окна.
+
+    // Внутренние параметры окна:
+    _EC_AppVars _appvars;
+} EC_Application;  // EC_ - Engine Core.
 
 
 // Конфигурация окна приложения:
 typedef struct EC_AppConfig {
-    const char *title;        // Заголовок окна.
-    EC_Bitmap  *icon;         // Иконка окна.
-    int         size[2];      // Размер окна {width, height}.
-    int         position[2];  // Позиция окна {x, y} или NULL для "по умолчанию".
-    bool        vsync;        // Вертикальная синхронизация.
-    int         fps;          // Количество кадров в секунду.
-    bool        visible;      // Видимость окна (скрыт/показан).
-    bool        titlebar;     // Видимость заголовка окна.
-    bool        resizable;    // Масштабируемость окна.
-    bool        fullscreen;   // Полноэкранный режим.
-    int         min_size[2];  // Минимальный размер окна {width, height}.
-    int         max_size[2];  // Максимальный размер окна {width, height}.
+    const char *title;  // Заголовок окна.
+    EC_Bitmap  *icon;   // Иконка окна.
+    int  size[2];       // Размер окна {width, height}.
+    int  position[2];   // Позиция окна {x, y} или NULL для "по умолчанию".
+    bool vsync;         // Вертикальная синхронизация.
+    int  fps;           // Количество кадров в секунду.
+    bool visible;       // Видимость окна (скрыт/показан).
+    bool titlebar;      // Видимость заголовка окна.
+    bool resizable;     // Масштабируемость окна.
+    bool fullscreen;    // Полноэкранный режим.
+    int  min_size[2];   // Минимальный размер окна {width, height}.
+    int  max_size[2];   // Максимальный размер окна {width, height}.
 } EC_AppConfig;  // EC_ - Engine Core.
+
+
+// Внутренние параметры окна:
+typedef struct _EC_AppVars {
+    const char *title;
+    EC_Bitmap  *icon;
+    int  size[2];
+    int  position[2];
+    bool vsync;
+    int  fps;
+    bool visible;
+    bool titlebar;
+    bool resizable;
+    bool fullscreen;
+    int  min_size[2];
+    int  max_size[2];
+} _EC_AppVars;
 
 
 /*

@@ -9,11 +9,11 @@
 // Главная основная общая структура приложения:
 typedef struct EC_Application EC_Application;
 
-// Набор функций для управления окном приложения (ДОЛЖНА БЫТЬ РЕАЛИЗАЦИЯ СВОИХ ФУНКЦИЙ):
-typedef struct EC_AppApi EC_AppApi;
-
 // Конфигурация окна приложения:
 typedef struct EC_AppConfig EC_AppConfig;
+
+// Внутренние параметры окна:
+typedef struct _EC_AppVars _EC_AppVars;
 
 
 #endif  // EC_GRAPHICS_APPLICATION_H
