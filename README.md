@@ -8,3 +8,6 @@
 #### Структура проекта построена на основе [C-Program-Framework](https://github.com/LukovDev/C-Program-Framework) базы.
 
 #
+
+### Связь со мной:
+#### [Telegram](https://t.me/mr_lukov)
