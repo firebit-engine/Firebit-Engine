@@ -21,8 +21,8 @@ def add(path: str) -> None:
 
 # Создать коммит:
 def commit() -> None:
-    commit_time = datetime.now().strftime("%d %B %Y %H:%M").lower()
-    subprocess.run(["git", "commit", "-m", f"commit {commit_time}"], check=True)
+    commit_time = datetime.now().strftime("commit %d %B %Y %H:%M").lower()
+    subprocess.run(["git", "commit", "-m", commit_time], check=True)
 
 
 # Получить изменения:
@@ -61,7 +61,7 @@ def branch(args: list) -> None:
 
 
 # Откат/удаление/отмена коммита:
-def remove(args: list) -> None:
+def reset(args: list) -> None:
     """
     git reset --soft HEAD~1
     Пример:
@@ -82,7 +82,7 @@ def remove(args: list) -> None:
     sure = input("<!> ARE YOU SURE ABOUT YOUR ACTIONS USING THIS FUNCTION? <!> y/n: ")
     if sure != "y": print("Cancelled."); return
 
-    subprocess.run(["git", "branch", *args], check=True)
+    subprocess.run(["git", "reset", *args], check=True)
 
 
 # Если этот скрипт запускают:
@@ -97,7 +97,7 @@ if __name__ == "__main__":
         "checkout": lambda a: checkout(a if a else error_missing_args("checkout")),
         "switch":   lambda a: switch(a if a else error_missing_args("switch")),
         "branch":   lambda a: branch(a if a else error_missing_args("branch")),
-        "remove":   lambda a: remove(a if a else error_missing_args("remove")),
+        "reset":   lambda a: reset(a if a else error_missing_args("reset")),
     }
 
     # Обрабатываем аргументы:
