@@ -5,3 +5,7 @@ build/tools/metadata.json
 build-engine-pc/bin/
 build-engine-pc/obj/
 build-engine-pc/tools/metadata.json
+*.DS_Store
+*._.DS_Store
+._*
+.smbdeleteAAA159
